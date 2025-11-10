@@ -173,7 +173,7 @@ func (t *SLOAwareRouter) ResponseReceived(ctx context.Context, request *scheduli
 
 func (t *SLOAwareRouter) ResponseStreaming(ctx context.Context, request *schedulingtypes.LLMRequest, response *requestcontrol.Response, pod *backend.Pod) {
 	logger := log.FromContext(ctx)
-	if !t.CheckPredictor(logger, pod) {
+	if !t.CheckPredictor(logger, pod) || response.EndOfStream {
 		return
 	}
 

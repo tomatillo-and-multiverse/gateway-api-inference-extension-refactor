@@ -82,7 +82,7 @@ func (h *SLOAwareProfileHandler) Pick(_ context.Context, _ *types.CycleState, re
 	}
 
 	if _, executed := profileResults[PrefixProfileName]; !executed {
-		// if prefix profile was not executed yet, first let the scheduler run the decode profile
+		// if prefix profile was not executed yet, first let the scheduler run the prefix profile
 		return map[string]*framework.SchedulerProfile{
 			PrefixProfileName: profiles[PrefixProfileName],
 		}

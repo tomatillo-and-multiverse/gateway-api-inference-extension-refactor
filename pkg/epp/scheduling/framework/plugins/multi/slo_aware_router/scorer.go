@@ -301,7 +301,7 @@ func (s *SLOAwareRouter) getPrefixCacheScoreForPod(ctx context.Context, cycleSta
 
 	if err != nil {
 		// The prefix cache plugin might not be enabled, which is a valid scenario.
-		log.FromContext(ctx).V(logutil.DEBUG).Info("Prefix cache state not found in cycle state, returning prefix cache score of 0.0", "pod", pod.GetPod().String())
+		log.FromContext(ctx).V(logutil.DEBUG).Info("prefix cache state not found in cycle state, returning prefix cache score of 0.0: %v", err, "pod", pod.GetPod().String())
 		return 0.0
 	}
 
