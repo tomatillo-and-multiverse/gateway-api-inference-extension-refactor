@@ -82,7 +82,11 @@ func (s *SLOAwareRouter) epsilonGreedyAffinityGate(
 	prefixStickyThreshold float64,
 ) ([]PodPredictionResult, bool) {
 	logger := log.FromContext(ctx)
-
+	if prefixStickyThreshold <= 0 {
+		// Affinity gating disabled
+		logger.V(logutil.DEBUG).Info("Affinity gating disabled (threshold <= 0)", "path", label)
+		return candidates, false
+	}
 	eligible := make([]PodPredictionResult, 0, len(candidates))
 	for _, p := range candidates {
 		if p.PrefixCacheScore >= prefixStickyThreshold {
